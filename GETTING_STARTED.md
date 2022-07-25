@@ -13,6 +13,8 @@ You can also refer to the https://github.com/openseg-group/openseg.pytorch/issue
 	You can install them together at [pytorch.org](https://pytorch.org) to make sure of this.
 
 You may use `pip install -r requirements.txt` to install the dependencies.
+`pip install pillow==6.2.1`  
+`pip install einops`  
 
 ## Configuration
 
@@ -35,6 +37,13 @@ python lib/datasets/preprocess/pascal_context/pascal_context_generator.py \
   --save_dir <path/to/preprocessed_context> --ori_root_dir <path/to/original_context>
 python lib/datasets/preprocess/coco_stuff/coco_stuff_generator.py \
   --save_dir <path/to/preprocessed_cocostuff> --ori_root_dir <path/to/original_cocostuff>
+```
+
+my docker env
+```
+python ./lib/datasets/preprocess/cityscapes/cityscapes_generator.py --coarse True \
+--save_dir /workspace/workspace/ProtoSeg_local/data/path/to/preprocessed_cityscapes \
+--ori_root_dir /workspace/workspace/ProtoSeg_local/data/origin
 ```
 
 and finally, the dataset directory should look like:
@@ -89,6 +98,11 @@ $DATA_ROOT
 Take HRNet-W48 + OCR on Cityscapes as an example. 
 
 First you should refer to [MODEL_ZOO.md](MODEL_ZOO.md) to download its pre-trained weights `hrnet_w48_ocr_1_latest.pth`, and put it to `$PROJECT_ROOT/checkpoints/cityscapes/`. Then execute `bash scripts/cityscapes/hrnet/run_h_48_d_4_ocr.sh val 1` to perform the inference. 
+
+run infer  
+```
+ bash scripts/cityscapes/hrnet/run_h_48_d_4.sh val hrnet_w48_ocr_1_latest.pth
+```
 
 Here `1` is the id of experiments, and should match the id in the name `hrnet_w48_ocr_1_latest.pth`, which may be modified accordingly for other scripts.
 
